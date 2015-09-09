@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="appName">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<BODY>
+<script src="/crud-portlets/js/angular.min.js"></script>
+<script>
+//Controller
+var myApp = angular.module('appName',[]);
+var repeatedProducts=function getList($scope, $http) {
+    $http.get('/rest/productdata/productlist').success(function(data) {
+            $scope.products = data;
+        });
+}
+
+
+</script>
+<div ng-controller="repeatedProducts">
+    <ul>
+        <li ng-repeat="product in products">
+            <div> Label: {{product.label}}</div>
+            <div> Category: {{product.category}}</div>
+            <div> Company: {{product.company}}</div>
+            <div> Price: {{product.price}}</div>
+            <div>--------------------------</div>
+        </li>
+    </ul>
+</div>
+</BODY>
+</html>
