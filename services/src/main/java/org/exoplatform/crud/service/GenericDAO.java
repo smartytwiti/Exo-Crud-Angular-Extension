@@ -20,7 +20,6 @@ public class GenericDAO<T> {
     private static SessionFactory sessionFactory;
     private static ServiceRegistry serviceRegistry;
     private Class<T> genericType;
-    private Session session;
     public GenericDAO(Class<T> type){
         genericType=type;
     }
@@ -29,25 +28,27 @@ public class GenericDAO<T> {
     public static SessionFactory createSessionFactory() {
             Configuration configuration = new Configuration();
             configuration.configure();
-            serviceRegistry = new ServiceRegistryBuilder().applySettings(
-                    configuration.getProperties()).buildServiceRegistry();
-            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            if(sessionFactory==null) {
+                serviceRegistry = new ServiceRegistryBuilder().applySettings(
+                        configuration.getProperties()).buildServiceRegistry();
+                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            }
         return sessionFactory;
     }
 
-    public void openSession(){
+    public Session getSession(){
         if(sessionFactory==null)
             sessionFactory=createSessionFactory();
-        if(session == null || !session.isOpen())
-            session=sessionFactory.openSession();
+        return sessionFactory.openSession();
+
 
     }
 
     public void persist(T t){
-        openSession();
+        Session session=getSession();
         try {
         Transaction tx=session.beginTransaction();
-            session.persist(t);
+        session.persist(t);
         tx.commit();
         }
         catch(Exception e){
@@ -61,7 +62,7 @@ public class GenericDAO<T> {
     }
 
     public void delete(T t){
-        openSession();
+        Session session=getSession();
         try{
             Transaction tx=session.beginTransaction();
             session.delete(t);
@@ -74,7 +75,7 @@ public class GenericDAO<T> {
     }
 
     public List<T> findAll(){
-        openSession();
+        Session session=getSession();
         List<T> result = null;
         try {
             Query query=session.createQuery("from " + genericType.getSimpleName());
@@ -89,7 +90,7 @@ public class GenericDAO<T> {
     }
 
     public T findById(int id){
-        openSession();
+        Session session=getSession();
         T t=null;
         try {
             t=(T) session.get(genericType, id);

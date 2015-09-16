@@ -10,7 +10,7 @@
     <!-- crud-addon wars -->
     <dependencySet>
       <useProjectArtifact>false</useProjectArtifact>
-      <outputDirectory>webapp</outputDirectory>
+      <outputDirectory>webapps</outputDirectory>
       <includes>
         <include>${project.groupId}:crud-portlets:war</include>
       </includes>
@@ -19,7 +19,7 @@
     </dependencySet>
     <dependencySet>
       <useProjectArtifact>false</useProjectArtifact>
-      <outputDirectory>webapp</outputDirectory>
+      <outputDirectory>webapps</outputDirectory>
       <includes>
         <include>${project.groupId}:crud-extension-war:war</include>
       </includes>
