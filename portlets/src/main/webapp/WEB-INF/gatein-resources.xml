@@ -25,9 +25,11 @@
       <name>CrudPortlet</name>
       <module>
          <depends>
-            <module>angularJS</module>
+              <module>angularJs1.4.7</module>
          </depends>
-
+          <depends>
+              <module>App</module>
+          </depends>
           <depends>
               <module>ProductController</module>
           </depends>
@@ -43,10 +45,21 @@
    </portlet>
 
    <module>
-      <name>angularJS</name>
+      <name>angularJs1.4.7</name>
       <script>
-         <path>/js/angular/angular.min.js</path>
+         <path>/bower_modules/angular/angular.min.js</path>
       </script>
+   </module>
+
+   <module>
+      <name>App</name>
+      <script>
+         <path>/pages/App.js</path>
+      </script>
+       <depends>
+           <module>angularJs1.4.7</module>
+           <as>angular</as>
+       </depends>
    </module>
 
    <module>
@@ -55,7 +68,7 @@
          <path>/pages/modules/product/ProductController.js</path>
       </script>
        <depends>
-           <module>angularJS</module>
+           <module>angularJs1.4.7</module>
            <as>angular</as>
        </depends>
    </module>
@@ -66,7 +79,7 @@
          <path>/pages/modules/product/ProductRoutes.js</path>
       </script>
        <depends>
-           <module>angularJS</module>
+           <module>angularJs1.4.7</module>
            <as>angular</as>
        </depends>
    </module>
@@ -77,7 +90,7 @@
          <path>/pages/modules/product/ProductService.js</path>
       </script>
         <depends>
-            <module>angularJS</module>
+            <module>angularJs1.4.7</module>
             <as>angular</as>
         </depends>
    </module>

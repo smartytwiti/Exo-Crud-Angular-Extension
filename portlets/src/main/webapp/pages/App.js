@@ -1,3 +1,1 @@
-var app =  angular.module('module.app',
-										['module.product'
-										 ]);
+var app =  angular.module('module.app',['module.product']);

@@ -1,49 +1,24 @@
 <!DOCTYPE html>
-<html id="crudMain" ng-app="appName">
+<html id="crudMain" ng-app="module.app">
 <head lang="en">
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/crud-portlets/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="/crud-portlets/css/bootstrap.min.css"> -->
     <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script-->
 
-<title></title>
+<title>hey!</title>
 </head>
 <BODY>
 
-<script>
-//Controller
-//require(["SHARED/bootstrap"]);
 
-require(["SHARED/angularJS"], function($){
-
-
-var rootPage=$('#crudMain');
-var myApp = angular.module('appName',[]);
-
-
-var repeatedProducts=function getList($scope, $http) {
-    $http.get('/rest/productdata/productlist').success(function(data) {
-            $scope.products = data;
-        });
-}
-myApp.controller("repeatedProducts",repeatedProducts);
-angular.bootstrap(rootPage,['appName']);
-
-});
-
-//require( ["gggg"], function (angularcec)
-//{
-//angularcec;
-//});
-</script>
-
-<div ng-controller="repeatedProducts">
+<div ng-controller="ProductController">
     <div class="container">
     <!--div-->
         <div class="table-responsive">
-        <!--div-->
-            <table class="table">
-            <!--table-->
+
+            Here my variable : {{myvar}}
+         <!--   <table class="table">
+
                 <thead>
                 <tr>
                     <th>id</th>
@@ -62,7 +37,7 @@ angular.bootstrap(rootPage,['appName']);
                     <td>{{product.price}}</td>
                 </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>
     </div>
     <!--ul>
