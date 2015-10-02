@@ -27,12 +27,59 @@
          <depends>
             <module>angularJS</module>
          </depends>
+
+          <depends>
+              <module>ProductController</module>
+          </depends>
+
+          <depends>
+              <module>ProductRoutes</module>
+          </depends>
+
+          <depends>
+              <module>ProductService</module>
+          </depends>
       </module>
    </portlet>
+
    <module>
       <name>angularJS</name>
       <script>
-         <path>/js/angular.min.js</path>
+         <path>/js/angular/angular.min.js</path>
       </script>
    </module>
+
+   <module>
+      <name>ProductController</name>
+      <script>
+         <path>/pages/modules/product/ProductController.js</path>
+      </script>
+       <depends>
+           <module>angularJS</module>
+           <as>angular</as>
+       </depends>
+   </module>
+
+   <module>
+      <name>ProductRoutes</name>
+      <script>
+         <path>/pages/modules/product/ProductRoutes.js</path>
+      </script>
+       <depends>
+           <module>angularJS</module>
+           <as>angular</as>
+       </depends>
+   </module>
+
+    <module>
+      <name>ProductService</name>
+      <script>
+         <path>/pages/modules/product/ProductService.js</path>
+      </script>
+        <depends>
+            <module>angularJS</module>
+            <as>angular</as>
+        </depends>
+   </module>
+
 </gatein-resources>

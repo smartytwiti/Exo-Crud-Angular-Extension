@@ -1,0 +1,18 @@
+{
+  "name": "bower",
+  "version": "0.0.1",
+  "homepage": "https://github.com/smartytwiti/Exo-Crud-Angular-Extension",
+  "description": "bower within a maven projet",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "Trabelsi Marwen"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.4.7",
+    "font-awesome": "4.4.0",
+    "bootstrap": "3.3.5"
+  }
+}

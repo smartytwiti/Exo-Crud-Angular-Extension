@@ -11,7 +11,7 @@ import java.io.IOException;
 public class CrudPortlet extends GenericPortlet {
     @RenderMode(name = "view")
     public void renderHome(RenderRequest request, RenderResponse response) throws IOException, PortletException {
-        PortletRequestDispatcher prDispatcher = getPortletContext().getRequestDispatcher("/pages/view.html");
+        PortletRequestDispatcher prDispatcher = getPortletContext().getRequestDispatcher("/pages/index.html");
         prDispatcher.include(request, response);
     }
 }

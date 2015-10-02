@@ -3,18 +3,19 @@ package org.exoplatform.crud.service;
 
 import org.exoplatform.common.http.HTTPStatus;
 import org.exoplatform.crud.entity.Product;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.annotation.security.RolesAllowed;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -25,6 +26,10 @@ import java.util.List;
 @Path("/productdata")
 public class ProductsRest implements ResourceContainer {
     GenericDAO genericDAO;
+
+
+    private static final Log log = ExoLogger.getLogger(ProductsRest.class);
+
     public ProductsRest(){
         genericDAO=new GenericDAO<Product>(Product.class);
 
@@ -34,10 +39,8 @@ public class ProductsRest implements ResourceContainer {
     @Path("productlist")
     @Produces("application/json")
     public Response getProducts(/*@Context SecurityContext sc*/) {
-        JSONObject jsonGlobal = new JSONObject();
         JSONArray jsonArray = new JSONArray();
         try {
-            mockFillProducts();
             List<Product> products=genericDAO.findAll();
             for(Product product:products){
                 JSONObject json = new JSONObject();
@@ -54,7 +57,36 @@ public class ProductsRest implements ResourceContainer {
         }
     }
 
-    public void mockFillProducts(){
+    @RolesAllowed("users")
+    @POST
+    @Path("create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response postStudentRecord(String prod) {
+        JSONObject json = null;
+        Product product = new Product();
+
+        try {
+          json  = new JSONObject(prod);
+
+            product.setLabel(json.getString("label"));
+            product.setCompany(json.getString("company"));
+            product.setCategory(json.getString("category"));
+            product.setPrice(json.getDouble("price"));
+
+            log.info("this is the received obj " + prod);
+            log.info("this is the constructed obj "+product);
+            genericDAO.persist(product);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String result = "Record entered: "+ prod;
+
+        return Response.status(201).entity(result).build();
+    }
+/**    public void mockFillProducts(){
         for(int i=0;i<10;i++){
             Product product=new Product();
             product.setLabel("Product "+i);
@@ -64,6 +96,6 @@ public class ProductsRest implements ResourceContainer {
             genericDAO.persist(product);
         }
     }
-
+*/
 
 }

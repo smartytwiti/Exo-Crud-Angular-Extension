@@ -40,8 +40,6 @@ public class GenericDAO<T> {
         if(sessionFactory==null)
             sessionFactory=createSessionFactory();
         return sessionFactory.openSession();
-
-
     }
 
     public void persist(T t){
